@@ -1,0 +1,53 @@
+# Here the Game OF Thrones is used.
+
+CREATE CLASS Person EXTENDS V
+CREATE PROPERTY Person.name STRING
+
+# Create Characters from Game Of Thrones
+CREATE VERTEX Person SET name='Aria'
+CREATE VERTEX Person SET name='Ned'
+CREATE VERTEX Person SET name='John'
+
+CREATE VERTEX Person SET name='Babka'
+CREATE VERTEX Person SET name='Ded_s_usami'
+
+CREATE VERTEX Person SET name='Jaemy'
+CREATE VERTEX Person SET name='Serseya'
+CREATE VERTEX Person SET name='Tirion'
+
+CREATE VERTEX Person SET name='Aegon'
+CREATE VERTEX Person SET name='Daeneris'
+
+CREATE VERTEX Person SET name='Gora'
+CREATE VERTEX Person SET name='GoldBank'
+
+CREATE VERTEX Person SET name='GodOfFire'
+CREATE VERTEX Person SET name='NightKing'
+
+CREATE CLASS Friends EXTENDS E
+CREATE CLASS Attends EXTENDS E
+CREATE CLASS Hates EXTENDS E
+
+CREATE CLASS House EXTENDS V
+CREATE PROPERTY House.name STRING
+CREATE PROPERTY House.tobedead INT
+
+CREATE VERTEX House SET name='Stark', tobedead=0
+CREATE VERTEX House SET name='Tyroll', tobedead=1
+CREATE VERTEX House SET name='Lanester', tobedead=0
+CREATE VERTEX House SET name='Targarien', tobedead=1
+
+CREATE EDGE Attends FROM (SELECT FROM Person WHERE name IN ['Aria', 'Ned', 'John']) TO (SELECT FROM House WHERE name = 'Stark')
+CREATE EDGE Attends FROM (SELECT FROM Person WHERE name IN ['Babka', 'Ded_s_usami']) TO (SELECT FROM House WHERE name='Tyroll')
+CREATE EDGE Attends FROM (SELECT FROM Person WHERE name IN ['Jaemy', 'Serseya', 'Tirion']) TO (SELECT FROM House WHERE name='Lanester')
+CREATE EDGE Attends FROM (SELECT FROM Person WHERE name IN ['John', 'Aegon', 'Daeneris']) TO (SELECT FROM House WHERE name='Targarien')
+
+CREATE EDGE Friends FROM (SELECT FROM Person WHERE name IN ['Aria', 'Ned', 'John']) TO (SELECT FROM Person WHERE name IN ['Tirion'])
+
+CREATE EDGE Friends FROM (SELECT FROM Person WHERE name IN ['Jaemy', 'Serseya']) TO (SELECT FROM Person WHERE name IN ['Gora', 'GoldBank'])
+
+CREATE EDGE Friends FROM (SELECT FROM Person WHERE name = 'GodOfFire') TO (SELECT FROM Person)
+CREATE EDGE Friends FROM (SELECT FROM Person) TO (SELECT FROM Person WHERE name = 'GodOfFire')
+
+CREATE EDGE Hates FROM (SELECT FROM Person WHERE name = 'NightKing') TO (SELECT FROM Person)
+CREATE EDGE Hates FROM (SELECT FROM Person) TO (SELECT FROM Person WHERE name = 'NightKing')

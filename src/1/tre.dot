@@ -1,0 +1,25 @@
+digraph G {
+	rankdir=BT;
+	edge [arrowhead=diamond];
+
+	n2 [label="Petr"];
+	n1 [label="Ivan"];
+	n3 [label="Nikolai"];
+	n4 [label="Anna"];
+	n5 [label="Elena"];
+	n1 [label="Ivan"];
+	n2 [label="Petr"];
+	n5 [label="Elena"];
+	n3 [label="Nikolai"];
+	n4 [label="Anna"];
+
+	n2 -> n1;
+	n3 -> n2;
+	n4 -> n3;
+	n5 -> n3;
+	n2 -> n3;
+	n5 -> n4;
+	n3 -> n4;
+	n4 -> n5;
+
+}
